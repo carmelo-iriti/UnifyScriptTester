@@ -183,13 +183,6 @@
         }
         function reloadPage() { location.reload(); }
         
-        // function displayLocalStorageData() {
-        //     var propertyId = document.getElementById('propertyId').value;
-        //     var key = '_sp_user_consent_' + propertyId;
-        //     var data = localStorage.getItem(key);
-        //     var displayElement = document.getElementById('localStorageData');
-        //     displayElement.textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'No data found';
-        // }
         function displayLocalStorageData() {
                 var propertyId = $('#propertyId').val();
                 var key = '_sp_user_consent_' + propertyId;
@@ -207,6 +200,33 @@
                     displayElement.jsonViewer(JSON.parse(data), options);
                 } else {
                     displayElement.text('No data found');
+                }
+            }
+
+            function loadGdprPm() {
+                var gdprPmId = document.getElementById('gdprPmId').value;
+                if (gdprPmId) {
+                    window._sp_.gdpr.loadPrivacyManagerModal(gdprPmId);
+                } else {
+                    console.log("No GDPR PM ID provided");
+                }
+            }
+
+            function loadCcpaPm() {
+                var ccpaPmId = document.getElementById('ccpaPmId').value;
+                if (ccpaPmId) {
+                    window._sp_.ccpa.loadPrivacyManagerModal(ccpaPmId);
+                } else {
+                    console.log("No CCPA PM ID provided");
+                }
+            }
+
+            function loadUsantPm() {
+                var usnatPmId = document.getElementById('usnatPmId').value;
+                if (usnatPmId) {
+                    window._sp_.usnat.loadPrivacyManagerModal(usnatPmId);
+                } else {
+                    console.log("No USNAT PM ID provided");
                 }
             }
     </script>
@@ -280,22 +300,30 @@
             </div>
         </div>
         <div class="row">
+            <div class="input-field">
+                <label for="gdprPmId">GDPR PmId</label>
+                <input type="text" id="gdprPmId" value="899812">
+            </div>
+            <div class="input-field">
+                <label for="ccpaPmId">CCPA PmId</label>
+                <input type="text" id="ccpaPmId" value="899813">
+            </div>
+            <div class="input-field">
+                <label for="usnatPmId">USNAT PmId</label>
+                <input type="text" id="usnatPmId" value="0000">
+            </div>
+        </div>
+        <div class="row">
             <div class="button-field">
                 <label>Main Label for Buttons</label>
                 <div class="button-group">
-                    <button type="button" onclick="buttonClicked('1')">Button 1</button>
+                    <button type="button" onclick="loadGdprPm()">GDPR Pm</button>
                 </div>
                 <div class="button-group">
-                    <button type="button" onclick="buttonClicked('1')">Button 2</button>
+                    <button type="button" onclick="loadCcpaPm()">CCPA Pm</button>
                 </div>
                 <div class="button-group">
-                    <button type="button" onclick="buttonClicked('1')">Button 3</button>
-                </div>
-                <div class="button-group">
-                    <button type="button" onclick="buttonClicked('1')">Button 4</button>
-                </div>
-                <div class="button-group">
-                    <button type="button" onclick="buttonClicked('1')">Button 5</button>
+                    <button type="button" onclick="loadUsantPm()">USNAT Pm</button>
                 </div>
             </div>
         </div>
