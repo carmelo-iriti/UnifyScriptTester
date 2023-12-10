@@ -11,7 +11,7 @@ ul.json-dict, ol.json-array {
   padding-left: 2em;
 }
 .json-string {
-  color: #b5ecaf;
+  color: #fffca6;
 }
 .json-literal {
   color: #e17171;
