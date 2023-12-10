@@ -163,6 +163,38 @@
     </script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to save the state of the checkboxes
+            function saveCheckboxState() {
+                var gdprChecked = document.getElementById('checkboxGDPR').checked;
+                var ccpaChecked = document.getElementById('checkboxCCPA').checked;
+                var usnatChecked = document.getElementById('checkboxUSNAT').checked;
+
+                localStorage.setItem('gdprCheckbox', gdprChecked);
+                localStorage.setItem('ccpaCheckbox', ccpaChecked);
+                localStorage.setItem('usnatCheckbox', usnatChecked);
+            }
+
+            // Function to restore the state of the checkboxes
+            function restoreCheckboxState() {
+                var gdprChecked = JSON.parse(localStorage.getItem('gdprCheckbox'));
+                var ccpaChecked = JSON.parse(localStorage.getItem('ccpaCheckbox'));
+                var usnatChecked = JSON.parse(localStorage.getItem('usnatCheckbox'));
+
+                document.getElementById('checkboxGDPR').checked = gdprChecked;
+                document.getElementById('checkboxCCPA').checked = ccpaChecked;
+                document.getElementById('checkboxUSNAT').checked = usnatChecked;
+            }
+
+            // Event listeners for checkbox state changes
+            document.getElementById('checkboxGDPR').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxCCPA').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxUSNAT').addEventListener('change', saveCheckboxState);
+
+            // Restore state on page load
+            restoreCheckboxState();
+        });
+
         window._sp_ = {
             config: {
                 accountId: 22,
@@ -170,9 +202,7 @@
                 propertyHref: 'https://automation-mobile-usnat',
                 // ccpa: {},
                 gdpr: {},
-                usnat: {
-                    transitionCCPAAuth: true
-                },
+                usnat: { transitionCCPAAuth: true },
                 events: {
                     onConsentReady: function (campaignType, uuid, consent) {
                         displayLocalStorageData();
@@ -454,16 +484,16 @@
             <div class="button-field">
                 <label>Utils</label>
                 <div class="button-group">
-                    <button type="button" onclick="loadMessages()">Load Messages</button>
+                    <button type="button" onclick="reloadPage()">Reload Page</button>
                 </div>
                 <div class="button-group">
                     <button type="button" onclick="clearLocalStorage()">Clea Local Storage</button>
                 </div>
                 <div class="button-group">
-                    <button type="button" onclick="reloadPage()">Reload Page</button>
+                    <button type="button" onclick="displayLocalStorageData()">Show LocalStorage</button>
                 </div>
                 <div class="button-group">
-                    <button type="button" onclick="displayLocalStorageData()">Show LocalStorage</button>
+                    <button type="button" onclick="loadMessages()">Load Messages</button>
                 </div>
             </div>
         </div>
