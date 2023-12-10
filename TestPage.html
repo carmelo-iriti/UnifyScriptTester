@@ -69,6 +69,33 @@
         .button-group button:active {
             transform: scale(0.95); /* Slightly scale down the button when pressed */
         }
+
+        .full-width-input {
+            flex: 0 0 100%; /* Take full width */
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .full-width-input input {
+            flex-grow: 1; /* Grow to take available space */
+            margin-right: 10px; /* Space between input and button */
+            background-color: #555; /* Darker background for input */
+            color: #fff; /* Light text for input */
+            border: 1px solid #777; /* Slightly lighter border for visibility */
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .full-width-input button {
+            flex-shrink: 0; /* Prevent button from shrinking */
+            padding: 10px;
+            margin-top: 5px;
+            transition: transform 0.1s ease; /* Smooth transition for the press effect */
+            background-color: #555; /* Darker background for input */
+            color: #fff; /* Light text for input */
+            border: 1px solid #777; /* Slightly lighter border for visibility */
+        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .input-field, .checkbox-group, .radio-group, .button-group {
@@ -229,6 +256,17 @@
                     console.log("No USNAT PM ID provided");
                 }
             }
+
+            function loadMessages(){}
+
+            function saveToLocalStorage() {
+                var propertyId = document.getElementById('propertyId').value;
+                var storageValue = document.getElementById('storageValue').value;
+                var key = '_sp_user_consent_' + propertyId;
+                localStorage.setItem(key, storageValue);
+                displayLocalStorageData();
+                console.log("Value saved to local storage for key", key, ":", storageValue);
+            }
     </script>
     <script>
         $(function() {
@@ -334,6 +372,13 @@
                 <div class="button-group">
                     <button type="button" onclick="displayLocalStorageData()">Show LocalStorage</button>
                 </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <label for="storageValue">Value for Local Storage:</label>
+            <div class="full-width-input">
+                <input type="text" id="storageValue" placeholder="Enter value">
+                <button type="button" onclick="saveToLocalStorage()">Save to Local Storage</button>
             </div>
         </div>
         <div class="row">
