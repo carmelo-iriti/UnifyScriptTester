@@ -168,8 +168,11 @@
                 accountId: 22,
                 baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
                 propertyHref: 'https://automation-mobile-usnat',
-                ccpa: {},
+                // ccpa: {},
                 gdpr: {},
+                usnat: {
+                    transitionCCPAAuth: true
+                },
                 events: {
                     onConsentReady: function (campaignType, uuid, consent) {
                         displayLocalStorageData();
@@ -202,12 +205,13 @@
     <script src="src/jquery.json-viewer.js"></script>
     <link href="css/jquery.json-viewer.css" type="text/css" rel="stylesheet">
     <script>
-        function buttonClicked(buttonNumber) {}
+
         function clearLocalStorage() {
             localStorage.clear();
             displayLocalStorageData();
             console.log("Local storage cleared");
         }
+
         function reloadPage() { location.reload(); }
         
         function displayLocalStorageData() {
@@ -259,7 +263,56 @@
                 }
             }
 
-            function loadMessages(){ }
+            function loadMessages() {
+
+                var isGdprChecked = document.getElementById('checkboxGDPR').checked;
+                var isCcpaChecked = document.getElementById('checkboxCCPA').checked;
+                var isUsnatChecked = document.getElementById('checkboxUSNAT').checked;
+
+                var spConfig = {
+                    config: {
+                        accountId: 22,
+                        baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
+                        propertyHref: 'https://automation-mobile-usnat',
+                        events: {
+                            onConsentReady: function (campaignType, uuid, consent) {
+                                displayLocalStorageData();
+                                window.postMessage({
+                                    name: 'onConsentReady',
+                                    payload: {
+                                        campaignType,
+                                        uuid,
+                                        consent
+                                    }
+                                }, '*');
+                                console.log("onConsentReady");
+                            },
+                            onError: function () {
+                                window.postMessage({
+                                    name: 'onError',
+                                    payload: {
+                                        ...arguments
+                                    }
+                                }, '*');
+                            },
+                        }
+                    }
+                };
+
+                if (isGdprChecked) {
+                    spConfig.config.gdpr = {};
+                }
+                if (isCcpaChecked) {
+                    spConfig.config.ccpa = {};
+                }
+                if (isUsnatChecked) {
+                    spConfig.config.usnat = {};
+                }
+
+                window._sp_ = spConfig;
+
+            }
+
 
             function displayLocalStorageDataAsString(){
                 var propertyId = $('#propertyId').val();
@@ -276,6 +329,39 @@
                 displayLocalStorageData();
                 console.log("Value saved to local storage for key", key, ":", storageValue);
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+            // Function to save the state of the checkboxes
+            function saveCheckboxState() {
+                var gdprChecked = document.getElementById('checkboxGDPR').checked;
+                var ccpaChecked = document.getElementById('checkboxCCPA').checked;
+                var usnatChecked = document.getElementById('checkboxUSNAT').checked;
+
+                localStorage.setItem('gdprCheckbox', gdprChecked);
+                localStorage.setItem('ccpaCheckbox', ccpaChecked);
+                localStorage.setItem('usnatCheckbox', usnatChecked);
+            }
+
+            // Function to restore the state of the checkboxes
+            function restoreCheckboxState() {
+                var gdprChecked = JSON.parse(localStorage.getItem('gdprCheckbox'));
+                var ccpaChecked = JSON.parse(localStorage.getItem('ccpaCheckbox'));
+                var usnatChecked = JSON.parse(localStorage.getItem('usnatCheckbox'));
+
+                document.getElementById('checkboxGDPR').checked = gdprChecked;
+                document.getElementById('checkboxCCPA').checked = ccpaChecked;
+                document.getElementById('checkboxUSNAT').checked = usnatChecked;
+            }
+
+            // Event listeners for checkbox state changes
+            document.getElementById('checkboxGDPR').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxCCPA').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxUSNAT').addEventListener('change', saveCheckboxState);
+
+            // Restore state on page load
+            restoreCheckboxState();
+        });
+
     </script>
     <script>
         $(function() {
@@ -367,6 +453,9 @@
         <div class="row">
             <div class="button-field">
                 <label>Utils</label>
+                <div class="button-group">
+                    <button type="button" onclick="loadMessages()">Load Messages</button>
+                </div>
                 <div class="button-group">
                     <button type="button" onclick="clearLocalStorage()">Clea Local Storage</button>
                 </div>
