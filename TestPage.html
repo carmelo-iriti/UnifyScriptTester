@@ -145,6 +145,7 @@
                 gdpr: {},
                 events: {
                     onConsentReady: function (campaignType, uuid, consent) {
+                        displayLocalStorageData();
                         window.postMessage({
                             name: 'onConsentReady',
                             payload: {
@@ -169,6 +170,10 @@
     </script>
     <script src='https://preprod-cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js' async></script>
     <script src='https://d3fkv551xkjrmm.cloudfront.net/js/messaging.js'></script>
+    <!-- Include jQuery and json-viewer library -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="css/jquery.json-viewer.js"></script>
+    <link href="css/jquery.json-viewer.css" type="text/css" rel="stylesheet">
     <script>
         function buttonClicked(buttonNumber) {}
         function clearLocalStorage() {
@@ -178,13 +183,42 @@
         }
         function reloadPage() { location.reload(); }
         
+        // function displayLocalStorageData() {
+        //     var propertyId = document.getElementById('propertyId').value;
+        //     var key = '_sp_user_consent_' + propertyId;
+        //     var data = localStorage.getItem(key);
+        //     var displayElement = document.getElementById('localStorageData');
+        //     displayElement.textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'No data found';
+        // }
         function displayLocalStorageData() {
-            var propertyId = document.getElementById('propertyId').value;
-            var key = '_sp_user_consent_' + propertyId;
-            var data = localStorage.getItem(key);
-            var displayElement = document.getElementById('localStorageData');
-            displayElement.textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'No data found';
-        }
+                var propertyId = $('#propertyId').val();
+                var key = '_sp_user_consent_' + propertyId;
+                var data = localStorage.getItem(key);
+                var displayElement = $('#localStorageData');
+                displayElement.empty(); // Clear existing content
+
+                if (data) {
+                    var options = {
+                        collapsed: $('#collapsed').is(':checked'),
+                        rootCollapsable: $('#root-collapsable').is(':checked'),
+                        withQuotes: $('#with-quotes').is(':checked'),
+                        withLinks: $('#with-links').is(':checked')
+                    };
+                    displayElement.jsonViewer(JSON.parse(data), options);
+                } else {
+                    displayElement.text('No data found');
+                }
+            }
+    </script>
+    <script>
+        $(function() {
+            // Trigger JSON viewer on button click or option change
+            $('#btn-json-viewer').click(displayLocalStorageData);
+            $('p.options input[type=checkbox]').click(displayLocalStorageData);
+
+            // Optionally, call displayLocalStorageData on page load or other events
+            displayLocalStorageData();
+        });
     </script>
 </head>
 <body">
