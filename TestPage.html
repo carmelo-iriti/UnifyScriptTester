@@ -69,14 +69,6 @@
         .button-group button:active {
             transform: scale(0.95); /* Slightly scale down the button when pressed */
         }
-        .collapsible {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .collapsed {
-            display: none;
-        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .input-field, .checkbox-group, .radio-group, .button-group {
@@ -185,57 +177,17 @@
             console.log("Local storage cleared");
         }
         function reloadPage() { location.reload(); }
-        function toggleCollapse(event) {
-            var target = event.target;
-            if (target.classList.contains('collapsible')) {
-                var content = target.nextElementSibling;
-                if (content) {
-                    content.classList.toggle('collapsed');
-                }
-            }
-        }
-
-        function createCollapsibleSection(key, value) {
-            var container = document.createElement('div');
-
-            var header = document.createElement('div');
-            header.textContent = key + ':';
-            header.classList.add('collapsible');
-            container.appendChild(header);
-
-            var content = document.createElement('div');
-            content.classList.add('collapsed');
-            if (typeof value === 'object' && value !== null) {
-                for (var subKey in value) {
-                    content.appendChild(createCollapsibleSection(subKey, value[subKey]));
-                }
-            } else {
-                content.textContent = value;
-            }
-            container.appendChild(content);
-
-            return container;
-        }
-
+        
         function displayLocalStorageData() {
             var propertyId = document.getElementById('propertyId').value;
             var key = '_sp_user_consent_' + propertyId;
             var data = localStorage.getItem(key);
             var displayElement = document.getElementById('localStorageData');
-            displayElement.innerHTML = ''; // Clear existing content
-
-            if (data) {
-                var parsedData = JSON.parse(data);
-                for (var key in parsedData) {
-                    displayElement.appendChild(createCollapsibleSection(key, parsedData[key]));
-                }
-            } else {
-                displayElement.textContent = 'No data found';
-            }
+            displayElement.textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'No data found';
         }
     </script>
 </head>
-<body onclick="toggleCollapse(event)">
+<body">
     <div class="container">
         <div class="row">
             <div class="input-field">
