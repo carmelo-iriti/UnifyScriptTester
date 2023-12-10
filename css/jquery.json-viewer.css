@@ -17,7 +17,18 @@ ul.json-dict, ol.json-array {
   color: #e17171;
   font-weight: bold;
 }
-
+.json-literal-null {
+  color: #718be1;
+  font-weight: bold;
+}
+.json-literal-number {
+  color: #91e0bf;
+  font-weight: bold;
+}
+.json-literal-boolean {
+  color: #ff8980;
+  font-weight: bold;
+}
 /* Toggle button */
 a.json-toggle {
   position: relative;

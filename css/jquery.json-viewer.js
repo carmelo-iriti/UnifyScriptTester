@@ -58,11 +58,11 @@
         html += '<span class="json-string">"' + json + '"</span>';
       }
     } else if (typeof json === 'number' || typeof json === 'bigint') {
-      html += '<span class="json-literal">' + json + '</span>';
+      html += '<span class="json-literal-number">' + json + '</span>';
     } else if (typeof json === 'boolean') {
-      html += '<span class="json-literal">' + json + '</span>';
+      html += '<span class="json-literal-boolean">' + json + '</span>';
     } else if (json === null) {
-      html += '<span class="json-literal">null</span>';
+      html += '<span class="json-literal-null">null</span>';
     } else if (json instanceof Array) {
       if (json.length > 0) {
         html += '[<ol class="json-array">';
