@@ -63,11 +63,11 @@
         .button-group button {
             padding: 10px;
             margin-top: 5px;
-            transition: transform 0.1s ease; /* Smooth transition for the press effect */
+            transition: transform 0.1s ease;
         }
 
         .button-group button:active {
-            transform: scale(0.95); /* Slightly scale down the button when pressed */
+            transform: scale(0.95);
         }
 
         .full-width-input {
@@ -225,9 +225,11 @@
                         withLinks: $('#with-links').is(':checked')
                     };
                     displayElement.jsonViewer(JSON.parse(data), options);
+                    
                 } else {
                     displayElement.text('No data found');
                 }
+                displayLocalStorageDataAsString();
             }
 
             function loadGdprPm() {
@@ -257,7 +259,14 @@
                 }
             }
 
-            function loadMessages(){}
+            function loadMessages(){ }
+
+            function displayLocalStorageDataAsString(){
+                var propertyId = $('#propertyId').val();
+                var key = '_sp_user_consent_' + propertyId;
+                var data = localStorage.getItem(key);
+                document.getElementById('storageValue').value = data ? data.toString() : "";
+            }
 
             function saveToLocalStorage() {
                 var propertyId = document.getElementById('propertyId').value;
@@ -270,11 +279,9 @@
     </script>
     <script>
         $(function() {
-            // Trigger JSON viewer on button click or option change
             $('#btn-json-viewer').click(displayLocalStorageData);
             $('p.options input[type=checkbox]').click(displayLocalStorageData);
 
-            // Optionally, call displayLocalStorageData on page load or other events
             displayLocalStorageData();
         });
     </script>
