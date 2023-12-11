@@ -194,14 +194,18 @@
             // Restore state on page load
             restoreCheckboxState();
         });
+    </script>
+
+    <script>
 
         window._sp_ = {
             config: {
                 accountId: 22,
                 baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
                 propertyHref: 'https://automation-mobile-usnat',
+                authId: "221590128",
                 // ccpa: {},
-                gdpr: {},
+                // gdpr: {},
                 usnat: { transitionCCPAAuth: true },
                 events: {
                     onConsentReady: function (campaignType, uuid, consent) {
