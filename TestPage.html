@@ -203,10 +203,10 @@
                 accountId: 22,
                 baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
                 propertyHref: 'https://automation-mobile-usnat',
-                authId: "221590128",
+                authId: "144711121",
                 // ccpa: {},
                 // gdpr: {},
-                usnat: { transitionCCPAAuth: true },
+                usnat: { transitionCCPAAuth: false },
                 events: {
                     onConsentReady: function (campaignType, uuid, consent) {
                         displayLocalStorageData();
@@ -220,14 +220,15 @@
                         }, '*');
                         console.log("onConsentReady")
                     },
-                    onError: function () {
-                        window.postMessage({
-                            name: 'onError',
-                            payload: {
-                                ...arguments
-                            }
-                        }, '*');
-                    },
+                    onMessageChoiceSelect: function () { console.log("[event] onMessageChoiceSelect", arguments); },
+                    onMessageReady: function () { console.log("[event] onMessageReady", arguments); },
+                    onMessageChoiceError: function () { console.log("[event] onMessageChoiceError", arguments);},
+                    onPrivacyManagerAction: function () { console.log("[event] onPrivacyManagerAction", arguments);},
+                    onPMCancel: function () { console.log("[event] onPMCancel", arguments); },
+                    onMessageReceiveData: function () { console.log("[event] onMessageReceiveData", arguments);},
+                    onSPPMObjectReady: function () { console.log("[event] onSPPMObjectReady", arguments); },
+                    onConsentReady: function (consentUUID, euconsent) { console.log("[event] onConsentReady", arguments);},
+                    onError: function () { console.log("[event] onError", arguments); },
                 }
             }
         }
