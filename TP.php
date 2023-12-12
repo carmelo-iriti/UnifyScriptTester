@@ -444,13 +444,20 @@
             var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
             var authId = document.getElementById('authId').value;
 
+            var gdprPmId = document.getElementById('gdprPmId').value;
+            var ccpaPmId = document.getElementById('ccpaPmId').value;
+            var usnatPmId = document.getElementById('usnatPmId').value;
+
             localStorage.setItem('gdprCheckbox', gdprChecked);
             localStorage.setItem('ccpaCheckbox', ccpaChecked);
             localStorage.setItem('usnatCheckbox', usnatChecked);
             localStorage.setItem('isUsnatTransitionCheckbox', isUsnatTransitionChecked);
             localStorage.setItem('authId', authId);
-        }
 
+            if (gdprPmId) localStorage.setItem('gdprPmId', gdprPmId);
+            if (ccpaPmId) localStorage.setItem('ccpaPmId', ccpaPmId);
+            if (usnatPmId) localStorage.setItem('usnatPmId', usnatPmId);
+        }
 
         function restoreState() {
             var gdprChecked = JSON.parse(localStorage.getItem('gdprCheckbox'));
@@ -459,15 +466,20 @@
             var isUsnatTransitionChecked = JSON.parse(localStorage.getItem('isUsnatTransitionCheckbox'));
             var authId = localStorage.getItem('authId');
 
+            var gdprPmId = localStorage.getItem('gdprPmId');
+            var ccpaPmId = localStorage.getItem('ccpaPmId');
+            var usnatPmId = localStorage.getItem('usnatPmId');
+
             document.getElementById('checkboxGDPR').checked = gdprChecked;
             document.getElementById('checkboxCCPA').checked = ccpaChecked;
             document.getElementById('checkboxUSNAT').checked = usnatChecked;
             document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
-            if (authId !== null && authId !== undefined) {
-                document.getElementById('authId').value = authId;
-            }
-        }
+            if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
 
+            if (gdprPmId !== null && gdprPmId !== undefined) document.getElementById('gdprPmId').value = gdprPmId;
+            if (ccpaPmId !== null && ccpaPmId !== undefined) document.getElementById('ccpaPmId').value = ccpaPmId;
+            if (usnatPmId !== null && usnatPmId !== undefined) document.getElementById('usnatPmId').value = usnatPmId;
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
 
