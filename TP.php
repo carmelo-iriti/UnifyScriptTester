@@ -478,7 +478,6 @@
             document.getElementById('usnatTransition').addEventListener('change', saveState);
             document.getElementById('authId').addEventListener('change', saveState);
 
-            // Restore state on page load
             restoreState();
         });
     </script>
@@ -492,20 +491,20 @@
     </script>
     <script>
         function loadDynamicScript() {
-            // Retrieve checkbox states
+            
             var isGdprChecked = document.getElementById('checkboxGDPR').checked;
             var isCcpaChecked = document.getElementById('checkboxCCPA').checked;
             var isUsnatChecked = document.getElementById('checkboxUSNAT').checked;
 
             var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
 
-            // Retrieve input field values
+            
             var propertyId = document.getElementById('propertyId').value;
             var accountId = document.getElementById('accountId').value;
             var propertyName = document.getElementById('propertyName').value;
             var authId = document.getElementById('authId').value;
 
-            // Create the inline script element
+            
             var inlineScript = document.createElement('script');
             inlineScript.type = 'text/javascript';
             inlineScript.innerHTML = `
@@ -549,7 +548,7 @@
                     `;
             document.head.appendChild(inlineScript);
 
-            // Create the external script element
+            
             var externalScript = document.createElement('script');
             externalScript.src = 'https://preprod-cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js';
             externalScript.async = true;
@@ -679,7 +678,7 @@
         <div class="row">
             <div class="data-field">
                 <label>Local Storage Data</label>
-                <pre id="localStorageData"></pre> <!-- Element to display the data -->
+                <pre id="localStorageData"></pre>
             </div>
         </div>
 
