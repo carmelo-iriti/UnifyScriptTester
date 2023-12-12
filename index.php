@@ -460,6 +460,12 @@
                 localStorage.setItem('campaignEnv', selectedCampaignEnv);
             }
 
+            var selectedEnvironmentRadio = document.querySelector('input[name="environment"]:checked');
+            if(selectedEnvironmentRadio) {
+                var selectedEnvironment = selectedEnvironmentRadio.value;
+                localStorage.setItem('selectedEnvironment', selectedEnvironment);
+            }
+
             localStorage.setItem('gdprCheckbox', gdprChecked);
             localStorage.setItem('ccpaCheckbox', ccpaChecked);
             localStorage.setItem('usnatCheckbox', usnatChecked);
@@ -483,6 +489,7 @@
             var usnatPmId = localStorage.getItem('usnatPmId');
 
             var savedCampaignEnv = localStorage.getItem('campaignEnv');
+            var savedEnvironment = localStorage.getItem('selectedEnvironment');
 
             document.getElementById('checkboxGDPR').checked = gdprChecked;
             document.getElementById('checkboxCCPA').checked = ccpaChecked;
@@ -493,7 +500,8 @@
             if (gdprPmId !== null && gdprPmId !== undefined) document.getElementById('gdprPmId').value = gdprPmId;
             if (ccpaPmId !== null && ccpaPmId !== undefined) document.getElementById('ccpaPmId').value = ccpaPmId;
             if (usnatPmId !== null && usnatPmId !== undefined) document.getElementById('usnatPmId').value = usnatPmId;
-            if(savedCampaignEnv) document.getElementById(savedCampaignEnv).checked = true;
+            if(savedCampaignEnv) document.getElementById(savedCampaignEnv).checked = true;      
+            if(savedEnvironment) document.getElementById(savedEnvironment).checked = true;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -532,6 +540,8 @@
             var campaignEnvElement = document.querySelector('input[name="campaignEnv"]:checked');
             var campaignEnv = campaignEnvElement ? campaignEnvElement.value : 'prod';
 
+            var selectedEnvironment = document.querySelector('input[name="environment"]:checked').value;
+            var environmentPrefix = selectedEnvironment === 'preprod' ? 'preprod-' : '';
             
             var inlineScript = document.createElement('script');
             inlineScript.type = 'text/javascript';
@@ -539,7 +549,7 @@
                         window._sp_ = {
                             config: {
                                 accountId: ${accountId ? accountId : 22},
-                                baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
+                                baseEndpoint: 'https://${environmentPrefix}cdn.privacy-mgmt.com',
                                 propertyHref: 'https://${propertyName}',
                                 campaignEnv: "${campaignEnv}",
                                 ${authId ? `authId: "${authId}",` : ''}
@@ -631,6 +641,19 @@
                 <div class="checkbox-group">
                     <input type="checkbox" id="usnatTransition">
                     <label for="usnatTransition">USNAT AuthId transition</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="radio-field">
+                <label>Environment</label>
+                <div class="radio-group">
+                    <input type="radio" id="prod" name="environment" value="prod" checked>
+                    <label for="prod">Prod</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="preprod" name="environment" value="preprod">
+                    <label for="preprod">Preprod</label>
                 </div>
             </div>
         </div>
