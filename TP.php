@@ -272,72 +272,6 @@
                 }
             }
 
-            function loadDynamicScript() {
-                    // Retrieve checkbox states
-            var isGdprChecked = document.getElementById('checkboxGDPR').checked;
-            var isCcpaChecked = document.getElementById('checkboxCCPA').checked;
-            var isUsnatChecked = document.getElementById('checkboxUSNAT').checked;
-
-            var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
-
-            // Retrieve input field values
-            var propertyId = document.getElementById('propertyId').value;
-            var accountId = document.getElementById('accountId').value;
-            var propertyName = document.getElementById('propertyName').value;
-
-            // Create the inline script element
-            var inlineScript = document.createElement('script');
-            inlineScript.type = 'text/javascript';
-            inlineScript.innerHTML = `
-                window._sp_ = {
-                    config: {
-                        accountId: ${accountId ? accountId : 22},
-                        baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
-                        propertyHref: 'https://${propertyName}',
-                        ${isGdprChecked ? 'gdpr: {},' : ''}
-                        ${isCcpaChecked ? 'ccpa: {},' : ''}
-                        ${isUsnatChecked ? `usnat: { transitionCCPAAuth: ${isUsnatTransitionChecked} },` : ''}
-                        events: {
-                            onConsentReady: function (campaignType, uuid, consent) {
-                                displayLocalStorageData();
-                                window.postMessage({
-                                    name: 'onConsentReady',
-                                    payload: {
-                                        campaignType,
-                                        uuid,
-                                        consent
-                                    }
-                                }, '*');
-                                console.log("onConsentReady");
-                            },
-                            onMessageChoiceSelect: function () { console.log("[event] onMessageChoiceSelect", arguments); },
-                            onMessageReady: function () { console.log("[event] onMessageReady", arguments); },
-                            onMessageChoiceError: function () { console.log("[event] onMessageChoiceError", arguments);},
-                            onPrivacyManagerAction: function () { console.log("[event] onPrivacyManagerAction", arguments);},
-                            onPMCancel: function () { console.log("[event] onPMCancel", arguments); },
-                            onMessageReceiveData: function () { console.log("[event] onMessageReceiveData", arguments);},
-                            onSPPMObjectReady: function () { console.log("[event] onSPPMObjectReady", arguments); },
-                            onConsentReady: function (consentUUID, euconsent) { 
-                                console.log("[event] onConsentReady", arguments);
-                                displayLocalStorageData();
-                            },
-                            onError: function () { console.log("[event] onError", arguments); },
-                        }
-                    }
-                };
-            `;
-            document.head.appendChild(inlineScript);
-
-            // Create the external script element
-            var externalScript = document.createElement('script');
-            externalScript.src = 'https://preprod-cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js';
-            externalScript.async = true;
-            document.head.appendChild(externalScript);
-
-            console.log('Scripts loaded dynamically.');
-        }
-
-
             function displayLocalStorageDataAsString(){
                 var propertyId = $('#propertyId').val();
                 var key = '_sp_user_consent_' + propertyId;
@@ -400,6 +334,72 @@
 
             displayLocalStorageData();
         });
+    </script>
+    <script>
+                    function loadDynamicScript() {
+                    // Retrieve checkbox states
+                var isGdprChecked = document.getElementById('checkboxGDPR').checked;
+                var isCcpaChecked = document.getElementById('checkboxCCPA').checked;
+                var isUsnatChecked = document.getElementById('checkboxUSNAT').checked;
+
+                var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
+
+                // Retrieve input field values
+                var propertyId = document.getElementById('propertyId').value;
+                var accountId = document.getElementById('accountId').value;
+                var propertyName = document.getElementById('propertyName').value;
+
+                // Create the inline script element
+                var inlineScript = document.createElement('script');
+                inlineScript.type = 'text/javascript';
+                inlineScript.innerHTML = `
+                    window._sp_ = {
+                        config: {
+                            accountId: ${accountId ? accountId : 22},
+                            baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
+                            propertyHref: 'https://${propertyName}',
+                            ${isGdprChecked ? 'gdpr: {},' : ''}
+                            ${isCcpaChecked ? 'ccpa: {},' : ''}
+                            ${isUsnatChecked ? `usnat: { transitionCCPAAuth: ${isUsnatTransitionChecked} },` : ''}
+                            events: {
+                                onConsentReady: function (campaignType, uuid, consent) {
+                                    displayLocalStorageData();
+                                    window.postMessage({
+                                        name: 'onConsentReady',
+                                        payload: {
+                                            campaignType,
+                                            uuid,
+                                            consent
+                                        }
+                                    }, '*');
+                                    console.log("onConsentReady");
+                                },
+                                onMessageChoiceSelect: function () { console.log("[event] onMessageChoiceSelect", arguments); },
+                                onMessageReady: function () { console.log("[event] onMessageReady", arguments); },
+                                onMessageChoiceError: function () { console.log("[event] onMessageChoiceError", arguments);},
+                                onPrivacyManagerAction: function () { console.log("[event] onPrivacyManagerAction", arguments);},
+                                onPMCancel: function () { console.log("[event] onPMCancel", arguments); },
+                                onMessageReceiveData: function () { console.log("[event] onMessageReceiveData", arguments);},
+                                onSPPMObjectReady: function () { console.log("[event] onSPPMObjectReady", arguments); },
+                                onConsentReady: function (consentUUID, euconsent) { 
+                                    console.log("[event] onConsentReady", arguments);
+                                    displayLocalStorageData();
+                                },
+                                onError: function () { console.log("[event] onError", arguments); },
+                            }
+                        }
+                    };
+                `;
+                document.head.appendChild(inlineScript);
+
+                // Create the external script element
+                var externalScript = document.createElement('script');
+                externalScript.src = 'https://preprod-cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js';
+                externalScript.async = true;
+                document.head.appendChild(externalScript);
+
+                console.log('Scripts loaded dynamically.');
+            }
     </script>
 </head>
 <body">
