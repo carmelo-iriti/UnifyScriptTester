@@ -334,12 +334,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Event listeners for checkbox state changes
+
             document.getElementById('checkboxGDPR').addEventListener('change', saveState);
             document.getElementById('checkboxCCPA').addEventListener('change', saveState);
             document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
 
-            // Restore state on page load
+            document.querySelectorAll('input[name="campaignEnv"]').forEach(radio => {
+                radio.addEventListener('change', saveState);
+            });
+
+            document.getElementById('propertyId').addEventListener('change', saveState);
+            document.getElementById('accountId').addEventListener('change', saveState);
+
             restoreState();
         });
     </script>
@@ -349,9 +355,9 @@
     <link href="css/jquery.json-viewer.css" type="text/css" rel="stylesheet">
     <script>
         function clearLocalStorage() {
-            var propertyId = $('#propertyId').val(); // Get the property ID
-            var key = '_sp_user_consent_' + propertyId; // Create the specific key
-            localStorage.removeItem(key); // Remove only this specific key from local storage
+            var propertyId = $('#propertyId').val();
+            var key = '_sp_user_consent_' + propertyId;
+            localStorage.removeItem(key);
             console.log(key + " removed");
             displayLocalStorageData();
         }
@@ -377,7 +383,7 @@
             var key = '_sp_user_consent_' + propertyId;
             var data = localStorage.getItem(key);
             var displayElement = $('#localStorageData');
-            displayElement.empty(); // Clear existing content
+            displayElement.empty();
 
             if (data) {
                 var options = {
@@ -448,6 +454,12 @@
             var ccpaPmId = document.getElementById('ccpaPmId').value;
             var usnatPmId = document.getElementById('usnatPmId').value;
 
+            var selectedCampaignEnvRadio = document.querySelector('input[name="campaignEnv"]:checked');
+            if(selectedCampaignEnvRadio) {
+                var selectedCampaignEnv = selectedCampaignEnvRadio.value;
+                localStorage.setItem('campaignEnv', selectedCampaignEnv);
+            }
+
             localStorage.setItem('gdprCheckbox', gdprChecked);
             localStorage.setItem('ccpaCheckbox', ccpaChecked);
             localStorage.setItem('usnatCheckbox', usnatChecked);
@@ -470,15 +482,18 @@
             var ccpaPmId = localStorage.getItem('ccpaPmId');
             var usnatPmId = localStorage.getItem('usnatPmId');
 
+            var savedCampaignEnv = localStorage.getItem('campaignEnv');
+
             document.getElementById('checkboxGDPR').checked = gdprChecked;
             document.getElementById('checkboxCCPA').checked = ccpaChecked;
             document.getElementById('checkboxUSNAT').checked = usnatChecked;
             document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
-            if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
 
+            if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
             if (gdprPmId !== null && gdprPmId !== undefined) document.getElementById('gdprPmId').value = gdprPmId;
             if (ccpaPmId !== null && ccpaPmId !== undefined) document.getElementById('ccpaPmId').value = ccpaPmId;
             if (usnatPmId !== null && usnatPmId !== undefined) document.getElementById('usnatPmId').value = usnatPmId;
+            if(savedCampaignEnv) document.getElementById(savedCampaignEnv).checked = true;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -509,12 +524,13 @@
             var isUsnatChecked = document.getElementById('checkboxUSNAT').checked;
 
             var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
-
             
             var propertyId = document.getElementById('propertyId').value;
             var accountId = document.getElementById('accountId').value;
             var propertyName = document.getElementById('propertyName').value;
             var authId = document.getElementById('authId').value;
+            var campaignEnvElement = document.querySelector('input[name="campaignEnv"]:checked');
+            var campaignEnv = campaignEnvElement ? campaignEnvElement.value : 'prod';
 
             
             var inlineScript = document.createElement('script');
@@ -525,6 +541,7 @@
                                 accountId: ${accountId ? accountId : 22},
                                 baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
                                 propertyHref: 'https://${propertyName}',
+                                campaignEnv: "${campaignEnv}",
                                 ${authId ? `authId: "${authId}",` : ''}
                                 ${isGdprChecked ? 'gdpr: {},' : ''}
                                 ${isCcpaChecked ? 'ccpa: {},' : ''}
@@ -619,14 +636,14 @@
         </div>
         <div class="row">
             <div class="radio-field">
-                <label>Radio Buttons</label>
+                <label>Campaign Env</label>
                 <div class="radio-group">
-                    <input type="radio" id="radio1" name="radio-group" checked>
-                    <label for="radio1">Radio 1</label>
+                    <input type="radio" id="prod" name="campaignEnv" value="prod" checked>
+                    <label for="prod">Prod</label>
                 </div>
                 <div class="radio-group">
-                    <input type="radio" id="radio2" name="radio-group">
-                    <label for="radio2">Radio 2</label>
+                    <input type="radio" id="stage" name="campaignEnv" value="stage">
+                    <label for="stage">Stage</label>
                 </div>
             </div>
         </div>
