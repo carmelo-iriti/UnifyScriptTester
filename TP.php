@@ -288,31 +288,38 @@
                 console.log("Value saved to local storage for key", key, ":", storageValue);
             }
 
-            // Function to save the state of the checkboxes
+            // Function to save the state of the checkboxes and authId
             function saveCheckboxState() {
                 var gdprChecked = document.getElementById('checkboxGDPR').checked;
                 var ccpaChecked = document.getElementById('checkboxCCPA').checked;
                 var usnatChecked = document.getElementById('checkboxUSNAT').checked;
                 var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
+                var authId = document.getElementById('authId').value;
 
                 localStorage.setItem('gdprCheckbox', gdprChecked);
                 localStorage.setItem('ccpaCheckbox', ccpaChecked);
                 localStorage.setItem('usnatCheckbox', usnatChecked);
                 localStorage.setItem('isUsnatTransitionCheckbox', isUsnatTransitionChecked);
+                localStorage.setItem('authId', authId);
             }
 
-            // Function to restore the state of the checkboxes
+            // Function to restore the state of the checkboxes and authId
             function restoreCheckboxState() {
                 var gdprChecked = JSON.parse(localStorage.getItem('gdprCheckbox'));
                 var ccpaChecked = JSON.parse(localStorage.getItem('ccpaCheckbox'));
                 var usnatChecked = JSON.parse(localStorage.getItem('usnatCheckbox'));
                 var isUsnatTransitionChecked = JSON.parse(localStorage.getItem('isUsnatTransitionCheckbox'));
+                var authId = localStorage.getItem('authId');
 
                 document.getElementById('checkboxGDPR').checked = gdprChecked;
                 document.getElementById('checkboxCCPA').checked = ccpaChecked;
                 document.getElementById('checkboxUSNAT').checked = usnatChecked;
                 document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
+                if (authId !== null && authId !== undefined) {
+                    document.getElementById('authId').value = authId;
+                }
             }
+
 
             document.addEventListener('DOMContentLoaded', function() {
         
@@ -348,6 +355,7 @@
                 var propertyId = document.getElementById('propertyId').value;
                 var accountId = document.getElementById('accountId').value;
                 var propertyName = document.getElementById('propertyName').value;
+                var authId = document.getElementById('authId').value;
 
                 // Create the inline script element
                 var inlineScript = document.createElement('script');
@@ -358,6 +366,7 @@
                             accountId: ${accountId ? accountId : 22},
                             baseEndpoint: 'https://preprod-cdn.privacy-mgmt.com',
                             propertyHref: 'https://${propertyName}',
+                            ${authId ? `authId: "${authId}",` : ''}
                             ${isGdprChecked ? 'gdpr: {},' : ''}
                             ${isCcpaChecked ? 'ccpa: {},' : ''}
                             ${isUsnatChecked ? `usnat: { transitionCCPAAuth: ${isUsnatTransitionChecked} },` : ''}
