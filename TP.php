@@ -335,12 +335,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Event listeners for checkbox state changes
-            document.getElementById('checkboxGDPR').addEventListener('change', saveCheckboxState);
-            document.getElementById('checkboxCCPA').addEventListener('change', saveCheckboxState);
-            document.getElementById('checkboxUSNAT').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxGDPR').addEventListener('change', saveState);
+            document.getElementById('checkboxCCPA').addEventListener('change', saveState);
+            document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
 
             // Restore state on page load
-            restoreCheckboxState();
+            restoreState();
         });
     </script>
     <!-- Include jQuery and json-viewer library -->
@@ -437,8 +437,7 @@
             console.log("Value saved to local storage for key", key, ":", storageValue);
         }
 
-        // Function to save the state of the checkboxes and authId
-        function saveCheckboxState() {
+        function saveState() {
             var gdprChecked = document.getElementById('checkboxGDPR').checked;
             var ccpaChecked = document.getElementById('checkboxCCPA').checked;
             var usnatChecked = document.getElementById('checkboxUSNAT').checked;
@@ -453,7 +452,7 @@
         }
 
 
-        function restoreCheckboxState() {
+        function restoreState() {
             var gdprChecked = JSON.parse(localStorage.getItem('gdprCheckbox'));
             var ccpaChecked = JSON.parse(localStorage.getItem('ccpaCheckbox'));
             var usnatChecked = JSON.parse(localStorage.getItem('usnatCheckbox'));
@@ -473,14 +472,14 @@
         document.addEventListener('DOMContentLoaded', function() {
 
 
-            document.getElementById('checkboxGDPR').addEventListener('change', saveCheckboxState);
-            document.getElementById('checkboxCCPA').addEventListener('change', saveCheckboxState);
-            document.getElementById('checkboxUSNAT').addEventListener('change', saveCheckboxState);
-            document.getElementById('usnatTransition').addEventListener('change', saveCheckboxState);
-            document.getElementById('authId').addEventListener('change', saveCheckboxState);
+            document.getElementById('checkboxGDPR').addEventListener('change', saveState);
+            document.getElementById('checkboxCCPA').addEventListener('change', saveState);
+            document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
+            document.getElementById('usnatTransition').addEventListener('change', saveState);
+            document.getElementById('authId').addEventListener('change', saveState);
 
             // Restore state on page load
-            restoreCheckboxState();
+            restoreState();
         });
     </script>
     <script>
