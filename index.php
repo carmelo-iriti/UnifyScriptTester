@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Form</title>
     <style>
+        h1 {
+            background-color: #734bc0; /* Sets the background color to purple */
+            color: #fff; /* Example: white color */
+            text-align: center; /* Centers the title */
+            padding: 10px 0; /* Adds padding above and below the title */
+            margin-top: 20px;
+        }
+
         body {
             background-color: #333;
             /* Dark background */
@@ -618,7 +626,7 @@
 </head>
 <body">
     <div class="container">
-
+        <h1>Metawebapp</h1>
         <div class="row">
             <div class="input-field">
                 <label for="propertyId">Property Id</label>
