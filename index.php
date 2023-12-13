@@ -149,7 +149,7 @@
             border: 1px solid #777;
             /* Slightly lighter border for visibility */
         }
-
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
 
@@ -697,7 +697,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row"  style="margin-top: 20px;">
             <div class="input-field">
                 <label for="gdprPmId">GDPR PmId</label>
                 <input type="text" id="gdprPmId" value="899812">
