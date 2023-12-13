@@ -449,6 +449,9 @@
             var usnatChecked = document.getElementById('checkboxUSNAT').checked;
             var isUsnatTransitionChecked = document.getElementById('usnatTransition').checked;
             var authId = document.getElementById('authId').value;
+            var accountId = document.getElementById('accountId').value;
+            var propertyId = document.getElementById('propertyId').value;
+            var propertyName = document.getElementById('propertyName').value;
 
             var gdprPmId = document.getElementById('gdprPmId').value;
             var ccpaPmId = document.getElementById('ccpaPmId').value;
@@ -471,10 +474,13 @@
             localStorage.setItem('usnatCheckbox', usnatChecked);
             localStorage.setItem('isUsnatTransitionCheckbox', isUsnatTransitionChecked);
             localStorage.setItem('authId', authId);
+            localStorage.setItem('accountId', accountId);
+            localStorage.setItem('propertyId', propertyId);
+            localStorage.setItem('propertyName', propertyName);
 
-            if (gdprPmId) localStorage.setItem('gdprPmId', gdprPmId);
-            if (ccpaPmId) localStorage.setItem('ccpaPmId', ccpaPmId);
-            if (usnatPmId) localStorage.setItem('usnatPmId', usnatPmId);
+            localStorage.setItem('gdprPmId', gdprPmId);
+            localStorage.setItem('ccpaPmId', ccpaPmId);
+            localStorage.setItem('usnatPmId', usnatPmId);
         }
 
         function restoreState() {
@@ -483,6 +489,9 @@
             var usnatChecked = JSON.parse(localStorage.getItem('usnatCheckbox'));
             var isUsnatTransitionChecked = JSON.parse(localStorage.getItem('isUsnatTransitionCheckbox'));
             var authId = localStorage.getItem('authId');
+            var accountId = localStorage.getItem('accountId');
+            var propertyId = localStorage.getItem('propertyId');
+            var propertyName = localStorage.getItem('propertyName');
 
             var gdprPmId = localStorage.getItem('gdprPmId');
             var ccpaPmId = localStorage.getItem('ccpaPmId');
@@ -497,6 +506,9 @@
             document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
 
             if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
+            if (accountId !== null && accountId !== undefined) document.getElementById('accountId').value = accountId;
+            if (propertyId !== null && propertyId !== undefined) document.getElementById('propertyId').value = propertyId;
+            if (propertyName !== null && propertyName !== undefined) document.getElementById('propertyName').value = propertyName;
             if (gdprPmId !== null && gdprPmId !== undefined) document.getElementById('gdprPmId').value = gdprPmId;
             if (ccpaPmId !== null && ccpaPmId !== undefined) document.getElementById('ccpaPmId').value = ccpaPmId;
             if (usnatPmId !== null && usnatPmId !== undefined) document.getElementById('usnatPmId').value = usnatPmId;
@@ -512,6 +524,13 @@
             document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
             document.getElementById('usnatTransition').addEventListener('change', saveState);
             document.getElementById('authId').addEventListener('change', saveState);
+            document.getElementById('accountId').addEventListener('change', saveState);
+            document.getElementById('propertyId').addEventListener('change', saveState);
+            document.getElementById('propertyName').addEventListener('change', saveState);
+
+            document.getElementById('ccpaPmId').addEventListener('change', saveState);
+            document.getElementById('usnatPmId').addEventListener('change', saveState);
+            document.getElementById('gdprPmId').addEventListener('change', saveState);
 
             restoreState();
         });
@@ -603,7 +622,7 @@
         <div class="row">
             <div class="input-field">
                 <label for="propertyId">Property Id</label>
-                <input type="text" id="propertyId" value="34049">
+                <input type="text" id="propertyId">
             </div>
             <div class="input-field">
                 <label for="accountId">Account Id</label>
@@ -611,7 +630,7 @@
             </div>
             <div class="input-field">
                 <label for="propertyName">Property Name</label>
-                <input type="text" id="propertyName" value="automation-mobile-usnat">
+                <input type="text" id="propertyName">
             </div>
             <div class="input-field">
                 <label for="authId">Auth Id</label>
@@ -648,11 +667,11 @@
             <div class="radio-field">
                 <label>Environment</label>
                 <div class="radio-group">
-                    <input type="radio" id="prod" name="environment" value="prod" checked>
+                    <input type="radio" id="prod" name="environment" value="prod">
                     <label for="prod">Prod</label>
                 </div>
                 <div class="radio-group">
-                    <input type="radio" id="preprod" name="environment" value="preprod">
+                    <input type="radio" id="preprod" name="environment" value="preprod" checked>
                     <label for="preprod">Preprod</label>
                 </div>
             </div>
