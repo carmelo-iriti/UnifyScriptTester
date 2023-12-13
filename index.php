@@ -149,6 +149,17 @@
             border: 1px solid #777;
             /* Slightly lighter border for visibility */
         }
+
+        #propertySelect {
+            width: 150%; /* Adjust as needed */
+            height: 40px; /* Adjust as needed */
+            font-size: 16px; /* Adjust as needed */
+            padding: 5px 10px; /* Adjust as needed */
+            border: 1px solid #777; /* Style for the border */
+            background-color: #555; /* Background color */
+            color: #fff; /* Text color */
+            box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+        }
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -354,6 +365,42 @@
             document.getElementById('propertyId').addEventListener('change', saveState);
             document.getElementById('accountId').addEventListener('change', saveState);
 
+            document.getElementById('propertySelect').addEventListener('change', function() {
+                var selectedProperty = properties[this.value];
+                if (selectedProperty) {
+                    document.getElementById('propertyId').value = selectedProperty.propertyId;
+                    document.getElementById('accountId').value = selectedProperty.accountId;
+                    document.getElementById('propertyName').value = selectedProperty.propertyName;
+                    document.getElementById('authId').value = selectedProperty.authId;
+                    document.getElementById('usnatPmId').value = selectedProperty.usnatPmId;
+                    document.getElementById('ccpaPmId').value = selectedProperty.ccpaPmId;
+                    document.getElementById('gdprPmId').value = selectedProperty.gdprPmId;
+                    setSelectedRadio('campaignEnv', selectedProperty.campaignEnv);
+                    setSelectedRadio('environment', selectedProperty.environment);
+                    document.getElementById('usnatTransition').checked = selectedProperty.usnatTransition;
+                    selectedProperty.campaigns.forEach(campaign => {
+                        document.getElementById('checkbox' + campaign).checked = true;
+                    });
+                    // Update other fields if necessary
+                } else {
+                    // Reset fields if no property is selected
+                    document.getElementById('propertyId').value = '';
+                    document.getElementById('accountId').value = '';
+                    document.getElementById('propertyName').value = '';
+                    document.getElementById('authId').value = '';
+                    document.getElementById('usnatPmId').value = '';
+                    document.getElementById('ccpaPmId').value = '';
+                    document.getElementById('gdprPmId').value = '';
+                    resetSelectedRadio('campaignEnv');
+                    resetSelectedRadio('environment');
+                    document.getElementById('usnatTransition').checked = false;
+                    ["GDPR", "CCPA", "USNAT"].forEach(campaign => {
+                        document.getElementById('checkbox' + campaign).checked = false;
+                    });
+                    // Reset other fields if necessary
+                }
+            });
+
             restoreState();
         });
     </script>
@@ -477,6 +524,8 @@
                 localStorage.setItem('selectedEnvironment', selectedEnvironment);
             }
 
+            var propertySelect = document.getElementById('propertySelect').value;
+
             localStorage.setItem('gdprCheckbox', gdprChecked);
             localStorage.setItem('ccpaCheckbox', ccpaChecked);
             localStorage.setItem('usnatCheckbox', usnatChecked);
@@ -489,6 +538,7 @@
             localStorage.setItem('gdprPmId', gdprPmId);
             localStorage.setItem('ccpaPmId', ccpaPmId);
             localStorage.setItem('usnatPmId', usnatPmId);
+            localStorage.setItem('selectedProperty', propertySelect);
         }
 
         function restoreState() {
@@ -508,10 +558,16 @@
             var savedCampaignEnv = localStorage.getItem('campaignEnv');
             var savedEnvironment = localStorage.getItem('selectedEnvironment');
 
+            var savedPropertySelect = localStorage.getItem('propertySelect');
+
             document.getElementById('checkboxGDPR').checked = gdprChecked;
             document.getElementById('checkboxCCPA').checked = ccpaChecked;
             document.getElementById('checkboxUSNAT').checked = usnatChecked;
             document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
+            
+            if (savedPropertySelect !== null && savedPropertySelect !== undefined) {
+                document.getElementById('propertySelect').value = savedPropertySelect;
+            }
 
             if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
             if (accountId !== null && accountId !== undefined) document.getElementById('accountId').value = accountId;
@@ -626,10 +682,66 @@
             console.log('Scripts loaded dynamically.');
         }
     </script>
+    <script>
+            var properties = {
+                "automation-mobile-usnat": {
+                    "propertyId": "34049",
+                    "accountId": "22",
+                    "propertyName": "automation-mobile-usnat",
+                    "authId": "",
+                    "usnatPmId": "930374",
+                    "ccpaPmId": "930569",
+                    "gdprPmId": "930471",
+                    "campaignEnv": "prod",
+                    "environment": "preprod",
+                    "usnatTransition": false,
+                    "campaigns": ["USNAT"]
+                },
+                "usnat.mobile.demo": {
+                    "propertyId": "34152",
+                    "accountId": "22",
+                    "propertyName": "usnat.mobile.demo",
+                    "authId": "",
+                    "usnatPmId": "943886",
+                    "ccpaPmId": "955869",
+                    "gdprPmId": "",
+                    "campaignEnv": "prod",
+                    "environment": "preprod",
+                    "usnatTransition": false,
+                    "campaigns": ["USNAT"]
+                }
+            };
+
+            // Helper function to set radio button selection
+            function setSelectedRadio(groupName, value) {
+                let radios = document.querySelectorAll(`input[name="${groupName}"]`);
+                radios.forEach(radio => {
+                    radio.checked = (radio.value === value);
+                });
+            }
+
+            // Helper function to reset radio button selection
+            function resetSelectedRadio(groupName) {
+                let radios = document.querySelectorAll(`input[name="${groupName}"]`);
+                radios.forEach(radio => {
+                    radio.checked = false;
+                });
+            }
+        </script>
 </head>
 <body">
     <div class="container">
         <h1>Metawebapp</h1>
+        <div class="row">
+            <div class="input-field">
+                <label for="propertySelect">Select Property</label>
+                <select id="propertySelect">
+                    <option value="">Select a property...</option>
+                    <option value="automation-mobile-usnat">automation-mobile-usnat</option>
+                    <option value="usnat.mobile.demo">usnat.mobile.demo</option>
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="input-field">
                 <label for="propertyId">Property Id</label>
