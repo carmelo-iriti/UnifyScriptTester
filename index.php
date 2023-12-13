@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Form</title>
+    <title>Property Runner</title>
     <style>
         h1 {
             background-color: #734bc0; /* Sets the background color to purple */
