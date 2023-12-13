@@ -607,13 +607,16 @@
                                         console.log("[event] onConsentReady", arguments);
                                         displayLocalStorageData();
                                     },
-                                    onError: function () { console.log("[event] onError", arguments); },
+                                    onError: function (category, errorCode) { 
+                                        console.log("[event] onError", arguments); 
+                                        alert("category[" + category + "] errorCode[" + errorCode + "]");
+                                    },
                                 }
                             }
                         };
                     `;
             document.head.appendChild(inlineScript);
-
+            
             
             var externalScript = document.createElement('script');
             externalScript.src = `https://${environmentPrefix}cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js`;
