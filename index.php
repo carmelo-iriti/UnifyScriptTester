@@ -616,7 +616,7 @@
 
             
             var externalScript = document.createElement('script');
-            externalScript.src = 'https://preprod-cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js';
+            externalScript.src = `https://${environmentPrefix}cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js`;
             externalScript.async = true;
             document.head.appendChild(externalScript);
 
