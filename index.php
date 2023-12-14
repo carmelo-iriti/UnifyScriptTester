@@ -151,7 +151,7 @@
         }
 
         #propertySelect {
-            width: 150%; /* Adjust as needed */
+            width: 100%; /* Adjust as needed */
             height: 40px; /* Adjust as needed */
             font-size: 16px; /* Adjust as needed */
             padding: 5px 10px; /* Adjust as needed */
@@ -697,6 +697,19 @@
                     "usnatTransition": false,
                     "campaigns": ["USNAT"]
                 },
+                "automation-mobile-usnat2": {
+                    "propertyId": "34336",
+                    "accountId": "22",
+                    "propertyName": "automation-mobile-usnat2",
+                    "authId": "",
+                    "usnatPmId": "961819",
+                    "ccpaPmId": "961815",
+                    "gdprPmId": "",
+                    "campaignEnv": "prod",
+                    "environment": "preprod",
+                    "usnatTransition": false,
+                    "campaigns": ["USNAT", "CCPA"]
+                },
                 "usnat.mobile.demo": {
                     "propertyId": "34152",
                     "accountId": "22",
@@ -753,6 +766,7 @@
                     <option value="automation-mobile-usnat">automation-mobile-usnat</option>
                     <option value="usnat.mobile.demo">usnat.mobile.demo</option>
                     <option value="mobile.multicampaign.demo">mobile.multicampaign.demo</option>
+                    <option value="automation-mobile-usnat2">automation-mobile-usnat2</option>
                 </select>
             </div>
         </div>
