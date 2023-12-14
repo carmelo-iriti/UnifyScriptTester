@@ -709,6 +709,19 @@
                     "environment": "preprod",
                     "usnatTransition": false,
                     "campaigns": ["USNAT"]
+                },
+                "mobile.multicampaign.demo": {
+                    "propertyId": "16893",
+                    "accountId": "22",
+                    "propertyName": "mobile.multicampaign.demo",
+                    "authId": "",
+                    "usnatPmId": "",
+                    "ccpaPmId": "509688",
+                    "gdprPmId": "488393",
+                    "campaignEnv": "prod",
+                    "environment": "prod",
+                    "usnatTransition": false,
+                    "campaigns": ["CCPA", "GDPR"]
                 }
             };
 
