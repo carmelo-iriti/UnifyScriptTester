@@ -752,6 +752,7 @@
                     <option value="">Select a property...</option>
                     <option value="automation-mobile-usnat">automation-mobile-usnat</option>
                     <option value="usnat.mobile.demo">usnat.mobile.demo</option>
+                    <option value="mobile.multicampaign.demo">mobile.multicampaign.demo</option>
                 </select>
             </div>
         </div>
