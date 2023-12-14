@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Runner</title>
 
-    <script src="src/utilities.js"></script>
-    <script src="src/stateManagement.js"></script>
-    <script src="src/dynamicScriptLoading.js"></script>
-    <script src="src/eventHandlers.js"></script>
-    <script src="src/init.js"></script>
-
     <style>
         h1 {
             background-color: #734bc0; /* Sets the background color to purple */
@@ -356,6 +350,60 @@
             }
         }, "__gpp" in window && "function" == typeof window.__gpp || (window.__gpp = window.__gpp_stub, window
             .addEventListener("message", window.__gpp_msghandler, !1), window.__gpp_addFrame("__gppLocator"));
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.getElementById('checkboxGDPR').addEventListener('change', saveState);
+            document.getElementById('checkboxCCPA').addEventListener('change', saveState);
+            document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
+
+            document.querySelectorAll('input[name="campaignEnv"]').forEach(radio => {
+                radio.addEventListener('change', saveState);
+            });
+
+            document.getElementById('propertyId').addEventListener('change', saveState);
+            document.getElementById('accountId').addEventListener('change', saveState);
+
+            document.getElementById('propertySelect').addEventListener('change', function() {
+                var selectedProperty = properties[this.value];
+                if (selectedProperty) {
+                    document.getElementById('propertyId').value = selectedProperty.propertyId;
+                    document.getElementById('accountId').value = selectedProperty.accountId;
+                    document.getElementById('propertyName').value = selectedProperty.propertyName;
+                    document.getElementById('authId').value = selectedProperty.authId;
+                    document.getElementById('usnatPmId').value = selectedProperty.usnatPmId;
+                    document.getElementById('ccpaPmId').value = selectedProperty.ccpaPmId;
+                    document.getElementById('gdprPmId').value = selectedProperty.gdprPmId;
+                    setSelectedRadio('campaignEnv', selectedProperty.campaignEnv);
+                    setSelectedRadio('environment', selectedProperty.environment);
+                    document.getElementById('usnatTransition').checked = selectedProperty.usnatTransition;
+                    selectedProperty.campaigns.forEach(campaign => {
+                        document.getElementById('checkbox' + campaign).checked = true;
+                    });
+                    // Update other fields if necessary
+                } else {
+                    // Reset fields if no property is selected
+                    document.getElementById('propertyId').value = '';
+                    document.getElementById('accountId').value = '';
+                    document.getElementById('propertyName').value = '';
+                    document.getElementById('authId').value = '';
+                    document.getElementById('usnatPmId').value = '';
+                    document.getElementById('ccpaPmId').value = '';
+                    document.getElementById('gdprPmId').value = '';
+                    resetSelectedRadio('campaignEnv');
+                    resetSelectedRadio('environment');
+                    document.getElementById('usnatTransition').checked = false;
+                    ["GDPR", "CCPA", "USNAT"].forEach(campaign => {
+                        document.getElementById('checkbox' + campaign).checked = false;
+                    });
+                    // Reset other fields if necessary
+                }
+            });
+
+            restoreState();
+        });
     </script>
     <!-- Include jQuery and json-viewer library -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
