@@ -12,7 +12,6 @@
     <script src="src/init.js"></script>
     <script src="src/stateManagement.js"></script>
     <script src="src/cmp-skd-config.js"></script>
-    <script src="src/eventHandlers.js"></script>
     <link href="css/style-runner.css" type="text/css" rel="stylesheet">
     
     <link href="css/jquery.json-viewer.css" type="text/css" rel="stylesheet">

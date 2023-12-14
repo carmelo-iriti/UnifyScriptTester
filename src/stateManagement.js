@@ -127,7 +127,7 @@ function saveState() {
     localStorage.setItem('gdprPmId', gdprPmId);
     localStorage.setItem('ccpaPmId', ccpaPmId);
     localStorage.setItem('usnatPmId', usnatPmId);
-    localStorage.setItem('selectedProperty', propertySelect);
+    localStorage.setItem('propertySelect', propertySelect);
 }
 
 function restoreState() {
@@ -153,10 +153,6 @@ function restoreState() {
     document.getElementById('checkboxCCPA').checked = ccpaChecked;
     document.getElementById('checkboxUSNAT').checked = usnatChecked;
     document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
-    
-    if (savedPropertySelect !== null && savedPropertySelect !== undefined) {
-        document.getElementById('propertySelect').value = savedPropertySelect;
-    }
 
     if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
     if (accountId !== null && accountId !== undefined) document.getElementById('accountId').value = accountId;
@@ -165,8 +161,9 @@ function restoreState() {
     if (gdprPmId !== null && gdprPmId !== undefined) document.getElementById('gdprPmId').value = gdprPmId;
     if (ccpaPmId !== null && ccpaPmId !== undefined) document.getElementById('ccpaPmId').value = ccpaPmId;
     if (usnatPmId !== null && usnatPmId !== undefined) document.getElementById('usnatPmId').value = usnatPmId;
-    if(savedCampaignEnv) document.getElementById(savedCampaignEnv).checked = true;      
-    if(savedEnvironment) document.getElementById(savedEnvironment).checked = true;
+    if (savedCampaignEnv) document.getElementById(savedCampaignEnv).checked = true;      
+    if (savedEnvironment) document.getElementById(savedEnvironment).checked = true;
+    if (savedPropertySelect !== null && savedPropertySelect !== undefined) document.getElementById('propertySelect').value = savedPropertySelect;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -184,6 +181,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('ccpaPmId').addEventListener('change', saveState);
     document.getElementById('usnatPmId').addEventListener('change', saveState);
     document.getElementById('gdprPmId').addEventListener('change', saveState);
+
+    document.getElementById('propertySelect').addEventListener('change', saveState);
 
     restoreState();
 });
