@@ -1,0 +1,178 @@
+h1 {
+    background-color: #734bc0; /* Sets the background color to purple */
+    color: #fff; /* Example: white color */
+    text-align: center; /* Centers the title */
+    padding: 10px 0; /* Adds padding above and below the title */
+    margin-top: 20px;
+}
+
+body {
+    background-color: #333;
+    /* Dark background */
+    color: #fff;
+    /* Light text */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-field {
+    flex: 0 0 15%;
+    /* Adjust the width for each input field */
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.input-field input,
+.checkbox-group input,
+.radio-group input,
+.button-group button {
+    background-color: #555;
+    /* Darker background for input */
+    color: #fff;
+    /* Light text for input */
+    border: 1px solid #777;
+    /* Slightly lighter border for visibility */
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.checkbox-field,
+.radio-field,
+.button-field,
+.data-field {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    margin-top: 30px;
+    /* Space between rows */
+}
+
+.checkbox-field>label,
+.radio-field>label,
+.button-field>label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+    /* Light text for labels */
+}
+
+.checkbox-group,
+.radio-group,
+.button-group {
+    display: inline-block;
+    /* or use 'flex' */
+    margin-right: 20px;
+    /* Spacing between groups */
+}
+
+.checkbox-group label,
+.radio-group label,
+.button-group label {
+    margin-left: 5px;
+}
+
+.button-group button {
+    padding: 10px;
+    margin-top: 5px;
+    transition: transform 0.1s ease;
+}
+
+.button-group button:active {
+    transform: scale(0.95);
+}
+
+.full-width-input {
+    flex: 0 0 100%;
+    /* Take full width */
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.full-width-input input {
+    flex-grow: 1;
+    /* Grow to take available space */
+    margin-right: 10px;
+    /* Space between input and button */
+    background-color: #555;
+    /* Darker background for input */
+    color: #fff;
+    /* Light text for input */
+    border: 1px solid #777;
+    /* Slightly lighter border for visibility */
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.full-width-input button {
+    flex-shrink: 0;
+    /* Prevent button from shrinking */
+    padding: 10px;
+    margin-top: 5px;
+    transition: transform 0.1s ease;
+    /* Smooth transition for the press effect */
+    background-color: #555;
+    /* Darker background for input */
+    color: #fff;
+    /* Light text for input */
+    border: 1px solid #777;
+    /* Slightly lighter border for visibility */
+}
+
+#propertySelect {
+    width: 100%; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    padding: 5px 10px; /* Adjust as needed */
+    border: 1px solid #777; /* Style for the border */
+    background-color: #555; /* Background color */
+    color: #fff; /* Text color */
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .input-field,
+    .checkbox-group,
+    .radio-group,
+    .button-group {
+        flex: 0 0 48%;
+        /* Adjust the width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .input-field,
+    .checkbox-group,
+    .radio-group,
+    .button-group {
+        flex: 0 0 100%;
+        /* Full width on very small screens */
+        margin-right: 0;
+    }
+}
