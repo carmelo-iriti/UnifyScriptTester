@@ -26,8 +26,8 @@ function setupEventListeners() {
     document.getElementById('ccpaPmId').addEventListener('change', saveState);
     document.getElementById('usnatPmId').addEventListener('change', saveState);
 
-
     document.getElementById('propertySelect').addEventListener('change', function() {
+        resetFormFields();
         var selectedProperty = properties[this.value];
         if (selectedProperty) {
 
@@ -44,9 +44,8 @@ function setupEventListeners() {
             selectedProperty.campaigns.forEach(campaign => {
                 document.getElementById('checkbox' + campaign).checked = true;
             });
-        } else {
-            resetFormFields();
         }
+        saveState()
     });
 }
 

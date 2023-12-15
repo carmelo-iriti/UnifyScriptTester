@@ -165,24 +165,3 @@ function restoreState() {
     if (savedEnvironment) document.getElementById(savedEnvironment).checked = true;
     if (savedPropertySelect !== null && savedPropertySelect !== undefined) document.getElementById('propertySelect').value = savedPropertySelect;
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-
-
-    document.getElementById('checkboxGDPR').addEventListener('change', saveState);
-    document.getElementById('checkboxCCPA').addEventListener('change', saveState);
-    document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
-    document.getElementById('usnatTransition').addEventListener('change', saveState);
-    document.getElementById('authId').addEventListener('change', saveState);
-    document.getElementById('accountId').addEventListener('change', saveState);
-    document.getElementById('propertyId').addEventListener('change', saveState);
-    document.getElementById('propertyName').addEventListener('change', saveState);
-
-    document.getElementById('ccpaPmId').addEventListener('change', saveState);
-    document.getElementById('usnatPmId').addEventListener('change', saveState);
-    document.getElementById('gdprPmId').addEventListener('change', saveState);
-
-    document.getElementById('propertySelect').addEventListener('change', saveState);
-
-    restoreState();
-});
