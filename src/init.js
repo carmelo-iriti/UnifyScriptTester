@@ -28,6 +28,8 @@ function setupEventListeners() {
 
     document.getElementById('propertySelect').addEventListener('change', function() {
         resetFormFields();
+        clearAllCookies();
+        clearLocalStorage();
         var selectedProperty = properties[this.value];
         if (selectedProperty) {
 
