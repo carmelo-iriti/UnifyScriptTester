@@ -49,7 +49,7 @@
                     "campaignEnv": "prod",
                     "environment": "preprod",
                     "usnatTransition": false,
-                    "campaigns": ["USNAT", "CCPA"]
+                    "campaigns": ["CCPA"]
                 },
                 "usnat.mobile.demo": {
                     "propertyId": "34152",
