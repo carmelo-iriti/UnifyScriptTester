@@ -1,4 +1,11 @@
 var updateTimer;
+var properties = []
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadProperties();
+    setupEventListeners();
+    restoreState();
+});
 
 function updateButton() {
     var versionValue = document.getElementById('version').value;
@@ -25,11 +32,6 @@ function updateURLParameter(key, value) {
     reloadPage(); // Reload the page
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    setupEventListeners();
-    restoreState();
-});
-
 function getURLParameter(name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results == null) {
@@ -48,7 +50,6 @@ function setupEventListeners() {
         clearTimeout(updateTimer); // Clear existing timer
         updateTimer = setTimeout(updateButton, 2000); // Set a new 2-second timer
     });
-    
 
     document.getElementById('checkboxGDPR').addEventListener('change', saveState);
     document.getElementById('checkboxCCPA').addEventListener('change', saveState);
@@ -75,7 +76,11 @@ function setupEventListeners() {
         resetFormFields();
         clearAllCookies();
         clearLocalStorage();
-        var selectedProperty = properties[this.value];
+
+        var keyProp = this.value;
+        var selectedProperty = properties.find(function(property) {
+            return property.propertyName === keyProp;
+        });
         if (selectedProperty) {
 
             document.getElementById('propertyId').value = selectedProperty.propertyId;
@@ -152,4 +157,22 @@ function resetSelectedRadio(groupName) {
     radios.forEach(radio => {
         radio.checked = false;
     });
+}
+
+function loadProperties() {
+    fetch('properties.json') // Replace with the actual path to your JSON file
+        .then(response => response.json())
+        .then(propertyArray => {
+            properties = propertyArray; // 
+            var select = document.getElementById('propertySelect');
+            propertyArray.forEach(function(property) {
+                var option = document.createElement('option');
+                option.value = property.propertyName;
+                option.textContent = property.propertyName;
+                select.appendChild(option);
+            });
+            var savedPropertySelect = localStorage.getItem('propertySelect');
+            select.value = savedPropertySelect;
+        })
+        .catch(error => console.error('Error loading propertyArray:', error));
 }

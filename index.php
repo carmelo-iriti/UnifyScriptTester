@@ -24,60 +24,60 @@
         });
     </script>
     <script>
-            var properties = {
-                "automation-mobile-usnat": {
-                    "propertyId": "34049",
-                    "accountId": "22",
-                    "propertyName": "automation-mobile-usnat",
-                    "authId": "",
-                    "usnatPmId": "930374",
-                    "ccpaPmId": "930569",
-                    "gdprPmId": "930471",
-                    "campaignEnv": "prod",
-                    "environment": "preprod",
-                    "usnatTransition": false,
-                    "campaigns": ["USNAT"]
-                },
-                "automation-mobile-usnat2": {
-                    "propertyId": "34336",
-                    "accountId": "22",
-                    "propertyName": "automation-mobile-usnat2",
-                    "authId": "",
-                    "usnatPmId": "961819",
-                    "ccpaPmId": "961815",
-                    "gdprPmId": "",
-                    "campaignEnv": "prod",
-                    "environment": "preprod",
-                    "usnatTransition": false,
-                    "campaigns": ["CCPA"]
-                },
-                "usnat.mobile.demo": {
-                    "propertyId": "34152",
-                    "accountId": "22",
-                    "propertyName": "usnat.mobile.demo",
-                    "authId": "",
-                    "usnatPmId": "943886",
-                    "ccpaPmId": "955869",
-                    "gdprPmId": "",
-                    "campaignEnv": "prod",
-                    "environment": "preprod",
-                    "usnatTransition": false,
-                    "campaigns": ["USNAT"]
-                },
-                "mobile.multicampaign.demo": {
-                    "propertyId": "16893",
-                    "accountId": "22",
-                    "propertyName": "mobile.multicampaign.demo",
-                    "authId": "",
-                    "usnatPmId": "",
-                    "ccpaPmId": "509688",
-                    "gdprPmId": "488393",
-                    "campaignEnv": "prod",
-                    "environment": "prod",
-                    "usnatTransition": false,
-                    "campaigns": ["CCPA", "GDPR"]
-                }
-            };
+            // var properties = {
+            //     "automation-mobile-usnat": {
+            //         "propertyId": "34049",
+            //         "accountId": "22",
+            //         "propertyName": "automation-mobile-usnat",
+            //         "authId": "",
+            //         "usnatPmId": "930374",
+            //         "ccpaPmId": "930569",
+            //         "gdprPmId": "930471",
+            //         "campaignEnv": "prod",
+            //         "environment": "preprod",
+            //         "usnatTransition": false,
+            //         "campaigns": ["USNAT"]
+            //     },
+            //     "automation-mobile-usnat2": {
+            //         "propertyId": "34336",
+            //         "accountId": "22",
+            //         "propertyName": "automation-mobile-usnat2",
+            //         "authId": "",
+            //         "usnatPmId": "961819",
+            //         "ccpaPmId": "961815",
+            //         "gdprPmId": "",
+            //         "campaignEnv": "prod",
+            //         "environment": "preprod",
+            //         "usnatTransition": false,
+            //         "campaigns": ["CCPA"]
+            //     },
+            //     "usnat.mobile.demo": {
+            //         "propertyId": "34152",
+            //         "accountId": "22",
+            //         "propertyName": "usnat.mobile.demo",
+            //         "authId": "",
+            //         "usnatPmId": "943886",
+            //         "ccpaPmId": "955869",
+            //         "gdprPmId": "",
+            //         "campaignEnv": "prod",
+            //         "environment": "preprod",
+            //         "usnatTransition": false,
+            //         "campaigns": ["USNAT"]
+            //     },
+            //     "mobile.multicampaign.demo": {
+            //         "propertyId": "16893",
+            //         "accountId": "22",
+            //         "propertyName": "mobile.multicampaign.demo",
+            //         "authId": "",
+            //         "usnatPmId": "",
+            //         "ccpaPmId": "509688",
+            //         "gdprPmId": "488393",
+            //         "campaignEnv": "prod",
+            //         "environment": "prod",
+            //         "usnatTransition": false,
+            //         "campaigns": ["CCPA", "GDPR"]
+            //     }
+            // };
 
             // Helper function to set radio button selection
             function setSelectedRadio(groupName, value) {
@@ -110,10 +110,6 @@
                 <label for="propertySelect">Select Property</label>
                 <select id="propertySelect">
                     <option value="">Select a property...</option>
-                    <option value="automation-mobile-usnat">automation-mobile-usnat</option>
-                    <option value="usnat.mobile.demo">usnat.mobile.demo</option>
-                    <option value="mobile.multicampaign.demo">mobile.multicampaign.demo</option>
-                    <option value="automation-mobile-usnat2">automation-mobile-usnat2</option>
                 </select>
             </div>
         </div>
