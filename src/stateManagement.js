@@ -96,6 +96,7 @@ function saveState() {
     var accountId = document.getElementById('accountId').value;
     var propertyId = document.getElementById('propertyId').value;
     var propertyName = document.getElementById('propertyName').value;
+    var version = document.getElementById('version').value;
 
     var gdprPmId = document.getElementById('gdprPmId').value;
     var ccpaPmId = document.getElementById('ccpaPmId').value;
@@ -115,6 +116,7 @@ function saveState() {
 
     var propertySelect = document.getElementById('propertySelect').value;
 
+    localStorage.setItem('version', version);
     localStorage.setItem('gdprCheckbox', gdprChecked);
     localStorage.setItem('ccpaCheckbox', ccpaChecked);
     localStorage.setItem('usnatCheckbox', usnatChecked);
@@ -139,6 +141,7 @@ function restoreState() {
     var accountId = localStorage.getItem('accountId');
     var propertyId = localStorage.getItem('propertyId');
     var propertyName = localStorage.getItem('propertyName');
+    var version = localStorage.getItem('version');
 
     var gdprPmId = localStorage.getItem('gdprPmId');
     var ccpaPmId = localStorage.getItem('ccpaPmId');
@@ -153,6 +156,8 @@ function restoreState() {
     document.getElementById('checkboxCCPA').checked = ccpaChecked;
     document.getElementById('checkboxUSNAT').checked = usnatChecked;
     document.getElementById('usnatTransition').checked = isUsnatTransitionChecked;
+
+    document.getElementById('version').value = version;
 
     if (authId !== null && authId !== undefined) document.getElementById('authId').value = authId;
     if (accountId !== null && accountId !== undefined) document.getElementById('accountId').value = accountId;

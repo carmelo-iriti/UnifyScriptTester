@@ -1,9 +1,41 @@
+var updateTimer;
+
+function updateButton() {
+    var versionValue = document.getElementById('version').value;
+    updateURLParameter('_sp_version', versionValue);
+}
+
+function updateURLParameter(key, value) {
+    var url = new URL(window.location.href);
+    var params = new URLSearchParams(url.search);
+
+    if (value) {
+        params.set(key, value); // Set or update the parameter
+    } else {
+        params.delete(key); // Remove the parameter if the input is empty
+    }
+
+    url.search = params.toString();
+    var newUrl = url.toString();
+
+    // Use this to change the URL without reloading (HTML5 feature)
+    window.history.pushState({path: newUrl}, '', newUrl);
+
+    saveState(); // Save the state
+    reloadPage(); // Reload the page
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     restoreState();
 });
 
 function setupEventListeners() {
+
+    document.getElementById('version').addEventListener('input', function() {
+        clearTimeout(updateTimer); // Clear existing timer
+        updateTimer = setTimeout(updateButton, 2000); // Set a new 2-second timer
+    });
 
     document.getElementById('checkboxGDPR').addEventListener('change', saveState);
     document.getElementById('checkboxCCPA').addEventListener('change', saveState);
