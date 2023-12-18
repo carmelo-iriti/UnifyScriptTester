@@ -30,12 +30,25 @@ document.addEventListener('DOMContentLoaded', function() {
     restoreState();
 });
 
+function getURLParameter(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results == null) {
+       return null;
+    }
+    return decodeURIComponent(results[1]) || null;
+}
+
 function setupEventListeners() {
+
+    // Set the input field value based on the URL parameter
+    var versionValue = getURLParameter('_sp_version');
+    localStorage.setItem('version', versionValue? versionValue : "");
 
     document.getElementById('version').addEventListener('input', function() {
         clearTimeout(updateTimer); // Clear existing timer
         updateTimer = setTimeout(updateButton, 2000); // Set a new 2-second timer
     });
+    
 
     document.getElementById('checkboxGDPR').addEventListener('change', saveState);
     document.getElementById('checkboxCCPA').addEventListener('change', saveState);
