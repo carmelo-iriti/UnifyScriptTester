@@ -101,6 +101,12 @@
         <h1>Metawebapp</h1>
         <div class="row">
             <div class="input-field">
+                <label for="version">Unified-script version</label>
+                <input type="text" id="version" placeholder="Enter value">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
                 <label for="propertySelect">Select Property</label>
                 <select id="propertySelect">
                     <option value="">Select a property...</option>
