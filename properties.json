@@ -1,5 +1,5 @@
-{
-    "automation-mobile-usnat": {
+[
+    {
         "propertyId": "34049",
         "accountId": "22",
         "propertyName": "automation-mobile-usnat",
@@ -12,7 +12,7 @@
         "usnatTransition": false,
         "campaigns": ["USNAT"]
     },
-    "automation-mobile-usnat2": {
+    {
         "propertyId": "34336",
         "accountId": "22",
         "propertyName": "automation-mobile-usnat2",
@@ -25,7 +25,7 @@
         "usnatTransition": false,
         "campaigns": ["CCPA"]
     },
-    "usnat.mobile.demo": {
+    {
         "propertyId": "34152",
         "accountId": "22",
         "propertyName": "usnat.mobile.demo",
@@ -38,7 +38,7 @@
         "usnatTransition": false,
         "campaigns": ["USNAT"]
     },
-    "mobile.multicampaign.demo": {
+    {
         "propertyId": "16893",
         "accountId": "22",
         "propertyName": "mobile.multicampaign.demo",
@@ -51,4 +51,4 @@
         "usnatTransition": false,
         "campaigns": ["CCPA", "GDPR"]
     }
-}
+]
