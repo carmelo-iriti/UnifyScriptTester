@@ -2,7 +2,11 @@ function clearLocalStorage() {
     var propertyId = $('#propertyId').val();
     var key = '_sp_user_consent_' + propertyId;
     localStorage.removeItem(key);
+    localStorage.removeItem("_sp_local_state");
+    localStorage.removeItem("_sp_non_keyed_local_state");
     console.log(key + " removed");
+    console.log("_sp_local_state" + " removed");
+    console.log("_sp_non_keyed_local_state" + " removed");
     displayLocalStorageData();
 }
 
