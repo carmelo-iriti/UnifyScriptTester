@@ -50,5 +50,18 @@
         "environment": "prod",
         "usnatTransition": false,
         "campaigns": ["CCPA", "GDPR"]
+    },
+    {
+        "propertyId": "34427",
+        "accountId": "22",
+        "propertyName": "test-geo1",
+        "authId": "",
+        "usnatPmId": "967876",
+        "ccpaPmId": "",
+        "gdprPmId": "",
+        "campaignEnv": "prod",
+        "environment": "preprod",
+        "usnatTransition": false,
+        "campaigns": ["USNAT"]
     }
 ]
