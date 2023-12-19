@@ -54,6 +54,7 @@ function setupEventListeners() {
     document.getElementById('checkboxGDPR').addEventListener('change', saveState);
     document.getElementById('checkboxCCPA').addEventListener('change', saveState);
     document.getElementById('checkboxUSNAT').addEventListener('change', saveState);
+    document.getElementById('usnatTransition').addEventListener('change', saveState);
 
 
     document.querySelectorAll('input[name="campaignEnv"]').forEach(radio => {
