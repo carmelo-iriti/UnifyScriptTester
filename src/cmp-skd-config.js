@@ -27,8 +27,11 @@ function loadDynamicScript() {
                         campaignEnv: "${campaignEnv}",
                         ${authId ? `authId: "${authId}",` : ''}
                         ${isGdprChecked ? 'gdpr: {},' : ''}
-                        ${isCcpaChecked ? 'ccpa: {},' : ''}
-                        ${isUsnatChecked ? `usnat: { transitionCCPAAuth: ${isUsnatTransitionChecked} },` : ''}
+                        ${isCcpaChecked ? 'ccpa: { includeGppApi: true },' : ''}
+                        ${isUsnatChecked ? `usnat: { 
+                                                        transitionCCPAAuth: ${isUsnatTransitionChecked} ,
+                                                        includeGppApi: true
+                                                    },` : ''}
                         events: {
                             onConsentReady: function (campaignType, uuid, consent) {
                                 displayLocalStorageData();
