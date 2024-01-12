@@ -63,5 +63,18 @@
         "environment": "preprod",
         "usnatTransition": false,
         "campaigns": ["USNAT"]
+    },
+    {
+        "propertyId": "34597",
+        "accountId": "22",
+        "propertyName": "android.test",
+        "authId": "",
+        "usnatPmId": "984467",
+        "ccpaPmId": "984469",
+        "gdprPmId": "990447",
+        "campaignEnv": "prod",
+        "environment": "prod",
+        "usnatTransition": false,
+        "campaigns": ["USNAT"]
     }
 ]
